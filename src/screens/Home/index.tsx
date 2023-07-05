@@ -1,11 +1,11 @@
 import React from 'react'
-
-import { StyleSheet, Text, View } from 'react-native'
 import * as St from "./styles"
+import Header from '../../components/Header'
 
 const Home = () => {
     return (
         <St.Container>
+            <Header carQuantity={0}/>
             <St.Title>home</St.Title>
         </St.Container>
     )
