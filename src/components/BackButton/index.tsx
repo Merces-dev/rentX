@@ -1,6 +1,6 @@
 import React from 'react'
 import * as St from "./styles"
-import { MaterialIcons } from '@expo/vector-icons'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useTheme } from 'styled-components/native'
 import { BorderlessButtonProps } from "react-native-gesture-handler"
