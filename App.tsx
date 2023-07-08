@@ -12,6 +12,8 @@ import { ThemeProvider } from "styled-components/native";
 import theme from "./src/global/styles/theme";
 import CarDetails from "./src/screens/CarDetails";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Scheduling from "./src/screens/Scheduling";
+import SchedulingDetails from "./src/screens/SchedulingDetails";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,7 +30,7 @@ export default function App() {
   return (
     <GestureHandlerRootView>
       <ThemeProvider theme={theme}>
-        <CarDetails />
+        <SchedulingDetails />
       </ThemeProvider>
     </GestureHandlerRootView>
   );

@@ -4,6 +4,7 @@ import BackButton from "../../components/BackButton";
 import ImageSlider from "../../components/ImageSlider";
 import Accessory from "../../components/Accessory";
 
+import { Feather } from "@expo/vector-icons";
 import SpeedSvg from "../../assets/speed.svg";
 import AccelerationSvg from "../../assets/acceleration.svg";
 import ForceSvg from "../../assets/force.svg";
@@ -11,8 +12,10 @@ import GasolineSvg from "../../assets/gasoline.svg";
 import ExchangeSvg from "../../assets/exchange.svg";
 import PeopleSvg from "../../assets/people.svg";
 import Button from "../../components/Button";
+import { RFValue } from "react-native-responsive-fontsize";
+import theme from "../../global/styles/theme";
 
-export default function CarDetails() {
+export default function SchedulingDetails() {
   return (
     <St.Container>
       <St.Header>
@@ -45,14 +48,38 @@ export default function CarDetails() {
           <Accessory name="Auto" icon={ExchangeSvg} />
           <Accessory name="2 pessoas" icon={PeopleSvg} />
         </St.Accessories>
-
-        <St.About>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quisquam
-          aspernatur nisi rem quasi hic temporibus ni
-        </St.About>
+        <St.RentalPeriod>
+          <St.CalendarIcon>
+            <Feather
+              name="calendar"
+              size={RFValue(24)}
+              color={theme.colors.shape}
+            />
+          </St.CalendarIcon>
+          <St.DateInfo>
+            <St.DateTitle>DE</St.DateTitle>
+            <St.DateValue>21/08/2023</St.DateValue>
+          </St.DateInfo>
+          <Feather
+            name="chevron-right"
+            size={RFValue(10)}
+            color={theme.colors.text}
+          />
+          <St.DateInfo>
+            <St.DateTitle>DE</St.DateTitle>
+            <St.DateValue>21/08/2023</St.DateValue>
+          </St.DateInfo>
+        </St.RentalPeriod>
+        <St.RentalPrice>
+          <St.RentalPriceLabel>TOTAL</St.RentalPriceLabel>
+          <St.RentalPriceDetails>
+            <St.RentalPriceQuota>R$ 580 x3 diárias</St.RentalPriceQuota>
+            <St.RentalPriceTotal>R$ 2.900</St.RentalPriceTotal>
+          </St.RentalPriceDetails>
+        </St.RentalPrice>
       </St.Content>
       <St.Footer>
-        <Button title={"Confirmar"} />
+        <Button title={"Alugar Agora"} color={theme.colors.success} />
       </St.Footer>
     </St.Container>
   );

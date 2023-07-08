@@ -3,7 +3,7 @@ import styled from "styled-components/native"
 import { BorderlessButton } from "react-native-gesture-handler"
 
 export const Container = styled.View`
-    width: 92px;
+    width: 112px;
     height: 92px;
 
     justify-content:center;
