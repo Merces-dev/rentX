@@ -1,5 +1,5 @@
+import "react-native-gesture-handler";
 import React from "react";
-import Home from "./src/screens/Home";
 
 import {
   useFonts,
@@ -10,10 +10,7 @@ import {
 import { Inter_400Regular, Inter_500Medium } from "@expo-google-fonts/inter";
 import { ThemeProvider } from "styled-components/native";
 import theme from "./src/global/styles/theme";
-import CarDetails from "./src/screens/CarDetails";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import Scheduling from "./src/screens/Scheduling";
-import SchedulingDetails from "./src/screens/SchedulingDetails";
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,10 +25,8 @@ export default function App() {
     return null;
   }
   return (
-    <GestureHandlerRootView>
-      <ThemeProvider theme={theme}>
-        <SchedulingDetails />
-      </ThemeProvider>
-    </GestureHandlerRootView>
+    <ThemeProvider theme={theme}>
+      <Routes />
+    </ThemeProvider>
   );
 }

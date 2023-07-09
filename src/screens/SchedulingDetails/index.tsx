@@ -66,7 +66,7 @@ export default function SchedulingDetails() {
             color={theme.colors.text}
           />
           <St.DateInfo>
-            <St.DateTitle>DE</St.DateTitle>
+            <St.DateTitle>ATÉ</St.DateTitle>
             <St.DateValue>21/08/2023</St.DateValue>
           </St.DateInfo>
         </St.RentalPeriod>
