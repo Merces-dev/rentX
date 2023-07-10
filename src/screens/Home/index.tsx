@@ -6,23 +6,32 @@ import Car from "../../components/Car";
 import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
 import { Load } from "../../components/Load";
+import { Ionicons } from "@expo/vector-icons";
+import { useTheme } from "styled-components";
 
 const Home = () => {
-  const [isFetchingCars, setIsFetchingCards] = useState<boolean>(true);
+  const [isFetchingCars, setIsFetchingCars] = useState<boolean>(true);
   const [cars, setCars] = useState<CarDTO[]>([]);
+  const theme = useTheme();
+
   const navigation = useNavigation();
+  
   function handleCarDetails(car: CarDTO) {
     navigation.navigate("CarDetails", { car });
   }
+  function handleMyCars(car: CarDTO) {
+    navigation.navigate("MyCars", { car });
+  }
+
   async function fetchCars() {
     try {
-      setIsFetchingCards(true);
+      setIsFetchingCars(true);
       const response = await api.get("/cars");
       setCars(response.data);
     } catch (error) {
       console.log(error);
     } finally {
-      setIsFetchingCards(false);
+      setIsFetchingCars(false);
     }
   }
   useEffect(() => {
@@ -37,7 +46,7 @@ const Home = () => {
       ) : (
         <St.CarList
           contentContainerStyle={{
-            padding: 18
+            padding: 18,
           }}
           data={cars}
           keyExtractor={(item: CarDTO) => item.id}
@@ -46,6 +55,9 @@ const Home = () => {
           )}
         />
       )}
+      <St.MyCarsButton onPress={handleMyCars}>
+        <Ionicons name="ios-car-sport" size={32} color={theme.colors.shape} />
+      </St.MyCarsButton>
     </St.Container>
   );
 };

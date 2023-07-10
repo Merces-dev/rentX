@@ -27,9 +27,9 @@ export const SchedulingComplete = () => {
         <DoneSvg width={80} height={80} />
         <St.Title>Carro alugado!</St.Title>
         <St.Message>
-          Lorem ipsum dolor, sit {"\n"}
-          amet consectetur adipisicing elit.{"\n"}
-          Ipsa ut dignissimos neque
+          Agora você só precisa ir{"\n"}
+          até a concessionária da RENTX{"\n"}
+          pegar o seu automóvel
         </St.Message>
         <St.Footer>
           <ConfirmButton title="OK" onPress={handleConfirm} />

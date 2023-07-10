@@ -8,7 +8,7 @@ export function Load() {
     <ActivityIndicator
       color={theme.colors.main}
       size="large"
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%", flex: 1 }}
     />
   );
 }
