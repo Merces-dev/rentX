@@ -14,12 +14,29 @@ import PeopleSvg from "../../assets/people.svg";
 import Button from "../../components/Button";
 import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../../global/styles/theme";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { CarDTO } from "../../dtos/CarDTO";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
+interface Params {
+  car: CarDTO;
+  dates: string[];
+}
 export default function SchedulingDetails() {
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const { car, dates } = route.params as Params;
+  function handleConfirmRental() {
+    navigation.navigate("SchedulingComplete");
+  }
+  function handleBack() {
+    navigation.goBack();
+  }
   return (
     <St.Container>
       <St.Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </St.Header>
       <St.CarImages>
         <ImageSlider
@@ -32,21 +49,22 @@ export default function SchedulingDetails() {
       <St.Content>
         <St.Details>
           <St.Description>
-            <St.Brand>Lamborghini</St.Brand>
-            <St.Name>Huracan</St.Name>
+            <St.Brand>{car.brand}</St.Brand>
+            <St.Name>{car.name}</St.Name>
           </St.Description>
           <St.Rent>
-            <St.Period>Ao dia</St.Period>
-            <St.Price>R$ 580</St.Price>
+            <St.Period>{car.rent.period}</St.Period>
+            <St.Price>R$ {car.rent.price}</St.Price>
           </St.Rent>
         </St.Details>
         <St.Accessories>
-          <Accessory name="380Km/h" icon={SpeedSvg} />
-          <Accessory name="3.2s" icon={AccelerationSvg} />
-          <Accessory name="800 HP" icon={ForceSvg} />
-          <Accessory name="Gasolina" icon={GasolineSvg} />
-          <Accessory name="Auto" icon={ExchangeSvg} />
-          <Accessory name="2 pessoas" icon={PeopleSvg} />
+          {car.accessories.map((accessory) => (
+            <Accessory
+              name={accessory.name}
+              key={accessory.type}
+              icon={getAccessoryIcon(accessory.type)}
+            />
+          ))}
         </St.Accessories>
         <St.RentalPeriod>
           <St.CalendarIcon>
@@ -58,7 +76,7 @@ export default function SchedulingDetails() {
           </St.CalendarIcon>
           <St.DateInfo>
             <St.DateTitle>DE</St.DateTitle>
-            <St.DateValue>21/08/2023</St.DateValue>
+            <St.DateValue>{dates[0]}</St.DateValue>
           </St.DateInfo>
           <Feather
             name="chevron-right"
@@ -67,7 +85,7 @@ export default function SchedulingDetails() {
           />
           <St.DateInfo>
             <St.DateTitle>ATÉ</St.DateTitle>
-            <St.DateValue>21/08/2023</St.DateValue>
+            <St.DateValue>{dates[1]}</St.DateValue>
           </St.DateInfo>
         </St.RentalPeriod>
         <St.RentalPrice>
@@ -79,7 +97,11 @@ export default function SchedulingDetails() {
         </St.RentalPrice>
       </St.Content>
       <St.Footer>
-        <Button title={"Alugar Agora"} color={theme.colors.success} />
+        <Button
+          title={"Alugar Agora"}
+          color={theme.colors.success}
+          onPress={handleConfirmRental}
+        />
       </St.Footer>
     </St.Container>
   );

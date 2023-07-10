@@ -1,39 +1,31 @@
-import React from 'react'
-import * as St from "./styles"
-import GasolineSvg from "./../../assets/gasoline.svg"
+import React from "react";
+import * as St from "./styles";
+import { RectButtonProps } from "react-native-gesture-handler";
+import { CarDTO } from "../../dtos/CarDTO";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 
-interface CarProps {
-    brand: string;
-    name: string;
-    rent: {
-        period: string;
-        price: number;
-    };
-    thumbnail: string;
+interface Props extends RectButtonProps {
+  data: CarDTO;
 }
-interface Props {
-    data: CarProps
-}
-export default function Car({ data }: Props) {
-    return (
-        <St.Container>
-            <St.Details>
-                <St.Brand>{data.brand}</St.Brand>
-                <St.Name>{data.name}</St.Name>
-                <St.About>
-                    <St.Rent>
-                        <St.Period>{data.rent.period}</St.Period>
-                        <St.Price>R$ {data.rent.price}</St.Price>
-                    </St.Rent>
-                    <St.Type>
-                        <GasolineSvg />
-                    </St.Type>
-                </St.About>
-            </St.Details>
-            <St.CarImage
-                source={{ uri: data.thumbnail }}
-                resizeMode="contain"
-            />
-        </St.Container>
-    )
+
+export default function Car({ data, ...rest }: Props) {
+  const MotorIcon = getAccessoryIcon(data.fuel_type);
+  return (
+    <St.Container {...rest}>
+      <St.Details>
+        <St.Brand>{data.brand}</St.Brand>
+        <St.Name>{data.name}</St.Name>
+        <St.About>
+          <St.Rent>
+            <St.Period>{data.rent.period}</St.Period>
+            <St.Price>R$ {data.rent.price}</St.Price>
+          </St.Rent>
+          <St.Type>
+            <MotorIcon />
+          </St.Type>
+        </St.About>
+      </St.Details>
+      <St.CarImage source={{ uri: data.thumbnail }} resizeMode="contain" />
+    </St.Container>
+  );
 }

@@ -27,7 +27,7 @@ export const Title = styled.Text`
     font-family: ${({ theme }) => theme.fonts.secondary_600};
     font-size: ${RFValue(34)}px;
 
-    margin-top: 24px;
+    margin-top: 14px;
 `
 
 export const RentalPeriod = styled.View`
@@ -43,13 +43,13 @@ export const DateInfo = styled.View`
     width: 30%;
 `
 export const DateTitle = styled.Text`
-    color: ${({ theme }) => theme.colors.shape};
+    color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.fonts.secondary_500};
     font-size: ${RFValue(10)}px;
 `
 
 export const DateValue = styled.Text<DateValueProps>`
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.shape};
     font-family: ${({ theme }) => theme.fonts.primary_500};
     font-size: ${RFValue(15)}px;
 

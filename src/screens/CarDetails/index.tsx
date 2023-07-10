@@ -4,55 +4,64 @@ import BackButton from "../../components/BackButton";
 import ImageSlider from "../../components/ImageSlider";
 import Accessory from "../../components/Accessory";
 
-import SpeedSvg from "../../assets/speed.svg";
-import AccelerationSvg from "../../assets/acceleration.svg";
-import ForceSvg from "../../assets/force.svg";
-import GasolineSvg from "../../assets/gasoline.svg";
-import ExchangeSvg from "../../assets/exchange.svg";
-import PeopleSvg from "../../assets/people.svg";
 import Button from "../../components/Button";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { CarDTO } from "../../dtos/CarDTO";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
+
+interface Params {
+  car: CarDTO;
+}
 
 export default function CarDetails() {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { car } = route.params as Params;
+
+  function handleConfirmRental() {
+    navigation.navigate("Scheduling", { car });
+  }
+
+  function handleBack() {
+    navigation.goBack();
+  }
+
   return (
     <St.Container>
       <St.Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={handleBack} />
       </St.Header>
       <St.CarImages>
-        <ImageSlider
-          imagesUrl={[
-            "https://ik.imagekit.io/2ero5nzbxo2/tr:di-placeholder.png,q-70,w-375,q-70/FILES/generations/WO5Gkl0APWC44FnH5HDZcL7OwmXmnqdyXF8PN84n.png?ik-sdk-version=php-2.0.0",
-            "https://ik.imagekit.io/2ero5nzbxo2/tr:di-placeholder.png,q-70,w-375,q-70/FILES/generations/WO5Gkl0APWC44FnH5HDZcL7OwmXmnqdyXF8PN84n.png?ik-sdk-version=php-2.0.0",
-          ]}
-        />
+        <ImageSlider imagesUrl={car.photos} />
       </St.CarImages>
       <St.Content>
         <St.Details>
           <St.Description>
-            <St.Brand>Lamborghini</St.Brand>
-            <St.Name>Huracan</St.Name>
+            <St.Brand>{car.brand}</St.Brand>
+            <St.Name>{car.name}</St.Name>
           </St.Description>
           <St.Rent>
-            <St.Period>Ao dia</St.Period>
-            <St.Price>R$ 580</St.Price>
+            <St.Period>{car.rent.period}</St.Period>
+            <St.Price>R$ {car.rent.price}</St.Price>
           </St.Rent>
         </St.Details>
         <St.Accessories>
-          <Accessory name="380Km/h" icon={SpeedSvg} />
-          <Accessory name="3.2s" icon={AccelerationSvg} />
-          <Accessory name="800 HP" icon={ForceSvg} />
-          <Accessory name="Gasolina" icon={GasolineSvg} />
-          <Accessory name="Auto" icon={ExchangeSvg} />
-          <Accessory name="2 pessoas" icon={PeopleSvg} />
+          {car.accessories.map((accessory) => (
+            <Accessory
+              name={accessory.name}
+              key={accessory.type}
+              icon={getAccessoryIcon(accessory.type)}
+            />
+          ))}
         </St.Accessories>
 
-        <St.About>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad quisquam
-          aspernatur nisi rem quasi hic temporibus ni
-        </St.About>
+        <St.About>{car.about}</St.About>
       </St.Content>
       <St.Footer>
-        <Button title={"Confirmar"} />
+        <Button
+          title={"Escolher período do aluguel"}
+          onPress={handleConfirmRental}
+        />
       </St.Footer>
     </St.Container>
   );

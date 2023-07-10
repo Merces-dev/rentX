@@ -1,28 +1,53 @@
-import React from 'react'
-import * as St from "./styles"
-import Header from '../../components/Header'
-import Car from '../../components/Car'
+import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import * as St from "./styles";
+import Header from "../../components/Header";
+import Car from "../../components/Car";
+import { api } from "../../services/api";
+import { CarDTO } from "../../dtos/CarDTO";
+import { Load } from "../../components/Load";
 
 const Home = () => {
-    const carData = [{
-        brand: 'audi',
-        name: 'RS 5 Coupe',
-        rent: {
-            period: 'ao dia',
-            price: 120
-        },
-        thumbnail: 'https://ik.imagekit.io/2ero5nzbxo2/tr:di-placeholder.png,q-70,w-375,q-70/FILES/generations/WO5Gkl0APWC44FnH5HDZcL7OwmXmnqdyXF8PN84n.png?ik-sdk-version=php-2.0.0'
-    }]
-    return (
-        <St.Container>
-            <Header carQuantity={0} />
-            <St.CarList
-                data={[1, 2, 3, 4, 5, 6, 7]}
-                keyExtractor={item => String(item)}
-                renderItem={({ item }) => <Car data={carData[0]} />}
-            />
-        </St.Container>
-    )
-}
+  const [isFetchingCars, setIsFetchingCards] = useState<boolean>(true);
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const navigation = useNavigation();
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate("CarDetails", { car });
+  }
+  async function fetchCars() {
+    try {
+      setIsFetchingCards(true);
+      const response = await api.get("/cars");
+      setCars(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsFetchingCards(false);
+    }
+  }
+  useEffect(() => {
+    fetchCars();
+  }, []);
 
-export default Home
+  return (
+    <St.Container>
+      <Header carQuantity={cars.length} />
+      {isFetchingCars ? (
+        <Load />
+      ) : (
+        <St.CarList
+          contentContainerStyle={{
+            padding: 18
+          }}
+          data={cars}
+          keyExtractor={(item: CarDTO) => item.id}
+          renderItem={({ item }) => (
+            <Car data={item} onPress={() => handleCarDetails(item)} />
+          )}
+        />
+      )}
+    </St.Container>
+  );
+};
+
+export default Home;
