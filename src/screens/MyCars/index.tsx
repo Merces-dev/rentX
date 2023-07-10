@@ -56,7 +56,7 @@ export function MyCars() {
         />
         <BackButton onPress={handleBack} color={theme.colors.shape} />
         <St.Title>
-          Escolha uma {"\n"}data de início e {"\n"}fim do aluguel
+          Seus agendamentos,{"\n"}estâo aqui.
         </St.Title>
         <St.SubTitle>Conforto, segurança e praticidade.</St.SubTitle>
       </St.Header>
