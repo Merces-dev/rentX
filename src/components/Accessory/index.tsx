@@ -1,6 +1,5 @@
 import React from "react";
 import * as St from "./styles";
-import { useTheme } from "styled-components/native";
 import { SvgProps } from "react-native-svg";
 
 interface AccessoryProps {

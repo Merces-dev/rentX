@@ -1,6 +1,5 @@
 import React from "react";
 import * as St from "./styles";
-import { useTheme } from "styled-components";
 
 import LogoSvg from "../../assets/logo_background_gray.svg";
 import DoneSvg from "../../assets/done.svg";
