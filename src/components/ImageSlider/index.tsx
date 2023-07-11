@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import * as St from "./styles";
 import { useTheme } from "styled-components/native";
 import { FlatList, ViewToken } from "react-native";
@@ -11,15 +11,18 @@ interface ChangeImageProps {
   changed: ViewToken[];
 }
 export default function ImageSlider({ imagesUrl }: SliderProps) {
+  const [imageIndex, setImageIndex] = useState<number>(0);
   const theme = useTheme();
-  function indexChanged(info: ChangeImageProps) {
+  const indexChanged = useRef((info: ChangeImageProps) => {
     console.log(info);
-  }
+    const index = info.viewableItems[0].index!;
+    setImageIndex(index);
+  });
   return (
     <St.Container>
       <St.ImageIndexes>
         {imagesUrl.map((_, index) => (
-          <St.ImageIndex key={String(index)} active={true} />
+          <St.ImageIndex key={String(index)} active={index === imageIndex} />
         ))}
       </St.ImageIndexes>
       <FlatList
@@ -32,7 +35,7 @@ export default function ImageSlider({ imagesUrl }: SliderProps) {
         )}
         horizontal
         showsHorizontalScrollIndicator={false}
-        onViewableItemsChanged={indexChanged}
+        onViewableItemsChanged={indexChanged.current}
       />
     </St.Container>
   );
