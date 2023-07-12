@@ -9,7 +9,7 @@ import { StatusBar, FlatList } from "react-native";
 import Car from "../../components/Car";
 
 import { AntDesign } from "@expo/vector-icons";
-import { Load } from "../../components/Load";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 interface CarProps {
   id: string;
@@ -61,7 +61,7 @@ export function MyCars() {
         <St.SubTitle>Conforto, segurança e praticidade.</St.SubTitle>
       </St.Header>
       {isFetchingCars ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <St.Content>
           <St.Appointments>

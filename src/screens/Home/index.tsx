@@ -6,7 +6,6 @@ import Header from "../../components/Header";
 import Car from "../../components/Car";
 import { api } from "../../services/api";
 import { CarDTO } from "../../dtos/CarDTO";
-import { Load } from "../../components/Load";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "styled-components";
 import Animated, {
@@ -16,6 +15,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import { PanGestureHandler, RectButton } from "react-native-gesture-handler";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
@@ -79,9 +79,9 @@ const Home = () => {
   });
   return (
     <St.Container>
-      <Header carQuantity={cars.length} />
+      <Header carQuantity={cars.length} isLoading={isFetchingCars} />
       {isFetchingCars ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <St.CarList
           contentContainerStyle={{
