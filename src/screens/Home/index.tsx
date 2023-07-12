@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as St from "./styles";
 import Header from "../../components/Header";
@@ -13,6 +13,7 @@ import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from "react-native-reanimated";
 import { PanGestureHandler, RectButton } from "react-native-gesture-handler";
 
@@ -44,7 +45,10 @@ const Home = () => {
       positionX.value = context.positionX + event.translationX;
       positionY.value = context.positionY + event.translationY;
     },
-    onEnd() {},
+    onEnd() {
+      positionX.value = withSpring(0);
+      positionY.value = withSpring(0);
+    },
   });
 
   function handleCarDetails(car: CarDTO) {
@@ -68,7 +72,11 @@ const Home = () => {
   useEffect(() => {
     fetchCars();
   }, []);
-
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      return true;
+    });
+  });
   return (
     <St.Container>
       <Header carQuantity={cars.length} />
