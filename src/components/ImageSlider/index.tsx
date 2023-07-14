@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import * as St from "./styles";
 import { useTheme } from "styled-components/native";
 import { FlatList, ViewToken } from "react-native";
+import { Bullet } from "../Bullet";
 
 interface SliderProps {
   imagesUrl: string[];
@@ -22,7 +23,7 @@ export default function ImageSlider({ imagesUrl }: SliderProps) {
     <St.Container>
       <St.ImageIndexes>
         {imagesUrl.map((_, index) => (
-          <St.ImageIndex key={String(index)} active={index === imageIndex} />
+          <Bullet key={String(index)} active={index === imageIndex} />
         ))}
       </St.ImageIndexes>
       <FlatList

@@ -5,18 +5,47 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 import Button from "../../components/Button";
 import { useTheme } from "styled-components";
 import Input from "../../components/Input";
 import InputPassword from "../../components/InputPassword";
+import * as Yup from "yup";
+import { useNavigation } from "@react-navigation/native";
 
 export const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const theme = useTheme();
+  const navigation = useNavigation();
 
+  async function handleSignIn() {
+    try {
+      const schema = Yup.object().shape({
+        password: Yup.string().required("Senha obrigatória"),
+        email: Yup.string()
+          .required("E-mail obrigatório")
+          .email("Digite um e-mail válido"),
+      });
+
+      await schema.validate({ email, password });
+
+      //login
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        return Alert.alert("Opa", error.message);
+      }
+      Alert.alert(
+        "Erro na autenticação",
+        "Ocorreu um erro ao fazer login, verifique as credenciais"
+      );
+    }
+  }
+  function handleNewAccount() {
+    navigation.navigate('SignUpFirstStep')
+  }
   return (
     <KeyboardAvoidingView behavior="position" enabled>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -52,15 +81,19 @@ export const SignIn = () => {
           <St.Footer>
             <Button
               title="Login"
-              onPress={() => {}}
+              onPress={() => {
+                handleSignIn();
+              }}
+              isEnabled={true}
               isLoading={false}
-              isEnabled={false}
             />
             <Button
               title="Criar conta gratuita"
-              onPress={() => {}}
+              onPress={() => {
+                handleNewAccount();
+              }}
               color={theme.colors.background_secondary}
-              isEnabled={false}
+              isEnabled={true}
               isLoading={false}
               light={true}
             />
