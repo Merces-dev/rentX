@@ -8,6 +8,7 @@ interface ButtonProps extends BorderlessButtonProps {
   color?: string;
   isEnabled?: boolean;
   isLoading?: boolean;
+  light?: boolean;
 }
 
 export default function Button({
@@ -15,6 +16,7 @@ export default function Button({
   color,
   isEnabled = true,
   isLoading = false,
+  light = false,
   ...rest
 }: ButtonProps) {
   return (
@@ -24,7 +26,11 @@ export default function Button({
       enabled={isEnabled}
       style={{ opacity: isEnabled === false || isLoading === true ? 0.5 : 1 }}
     >
-      {isLoading ? <ActivityIndicator /> : <St.Title>{title}</St.Title>}
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <St.Title light={light}>{title}</St.Title>
+      )}
     </St.Container>
   );
 }
