@@ -8,6 +8,8 @@ interface ContainerProps {
 
 export const Container = styled.View<ContainerProps>`
   flex-direction: row;
+  margin-bottom: 8px;
+
   ${({ isFocused, isFilled, theme }) =>
     (isFocused || isFilled) &&
     css`

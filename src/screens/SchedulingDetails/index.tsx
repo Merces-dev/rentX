@@ -56,7 +56,6 @@ export default function SchedulingDetails() {
         endDate: rentalPeriod.end,
       });
       try {
-
         if (schedulesByCar.data) {
           unavailable_dates = [
             ...schedulesByCar.data.unavailable_dates,
@@ -73,7 +72,11 @@ export default function SchedulingDetails() {
             unavailable_dates: unavailable_dates,
           });
         }
-        navigation.navigate("SchedulingComplete");
+        navigation.navigate("Confirmation", {
+          title: "Carro alugado!",
+          message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar o seu automóvel`,
+          nextScreenRoute: "Home",
+        });
       } catch (error) {
         console.log(error);
         setIsLoading(false);
