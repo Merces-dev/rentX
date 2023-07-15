@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, BackHandler } from "react-native";
+import { StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as St from "./styles";
 import Header from "../../components/Header";
@@ -72,11 +72,6 @@ const Home = () => {
   useEffect(() => {
     fetchCars();
   }, []);
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => {
-      return true;
-    });
-  });
   return (
     <St.Container>
       <Header carQuantity={cars.length} isLoading={isFetchingCars} />

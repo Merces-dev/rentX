@@ -13,16 +13,20 @@ import Input from "../../components/Input";
 import InputPassword from "../../components/InputPassword";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 export const SignIn = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const theme = useTheme();
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
   async function handleSignIn() {
     try {
+      setIsLoading(true);
       const schema = Yup.object().shape({
         password: Yup.string().required("Senha obrigatória"),
         email: Yup.string()
@@ -32,19 +36,21 @@ export const SignIn = () => {
 
       await schema.validate({ email, password });
 
-      //login
+      await signIn({ email, password });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
-        return Alert.alert("Opa", error.message);
+        Alert.alert("Opa", error.message);
+      } else {
+        Alert.alert(
+          "Erro na autenticação",
+          "Ocorreu um erro ao fazer login, verifique as credenciais"
+        );
       }
-      Alert.alert(
-        "Erro na autenticação",
-        "Ocorreu um erro ao fazer login, verifique as credenciais"
-      );
     }
+    setIsLoading(false);
   }
   function handleNewAccount() {
-    navigation.navigate('SignUpFirstStep')
+    navigation.navigate("SignUpFirstStep");
   }
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -81,11 +87,9 @@ export const SignIn = () => {
           <St.Footer>
             <Button
               title="Login"
-              onPress={() => {
-                handleSignIn();
-              }}
-              isEnabled={true}
-              isLoading={false}
+              onPress={handleSignIn}
+              isEnabled={!isLoading}
+              isLoading={isLoading}
             />
             <Button
               title="Criar conta gratuita"
@@ -93,7 +97,7 @@ export const SignIn = () => {
                 handleNewAccount();
               }}
               color={theme.colors.background_secondary}
-              isEnabled={true}
+              isEnabled={!isLoading}
               isLoading={false}
               light={true}
             />

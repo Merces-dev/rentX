@@ -17,8 +17,8 @@ export default function Car({ data, ...rest }: Props) {
         <St.Name>{data.name}</St.Name>
         <St.About>
           <St.Rent>
-            <St.Period>{data.rent.period}</St.Period>
-            <St.Price>R$ {data.rent.price}</St.Price>
+            <St.Period>{data.period}</St.Period>
+            <St.Price>R$ {data.price}</St.Price>
           </St.Rent>
           <St.Type>
             <MotorIcon />

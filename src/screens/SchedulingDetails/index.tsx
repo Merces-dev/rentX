@@ -35,7 +35,7 @@ export default function SchedulingDetails() {
 
   const { car, dates } = route.params as Params;
 
-  const rentTotal = car.rent.price * dates.length;
+  const rentTotal = car.price * dates.length;
   async function getCarSchedules() {
     try {
       const schedulesByCar: any = await api.get(`/schedules_bycars/${car.id}`);
@@ -123,8 +123,8 @@ export default function SchedulingDetails() {
             <St.Name>{car.name}</St.Name>
           </St.Description>
           <St.Rent>
-            <St.Period>{car.rent.period}</St.Period>
-            <St.Price>R$ {car.rent.price}</St.Price>
+            <St.Period>{car.period}</St.Period>
+            <St.Price>R$ {car.price}</St.Price>
           </St.Rent>
         </St.Details>
         <St.Accessories>
@@ -161,7 +161,7 @@ export default function SchedulingDetails() {
         <St.RentalPrice>
           <St.RentalPriceLabel>TOTAL</St.RentalPriceLabel>
           <St.RentalPriceDetails>
-            <St.RentalPriceQuota>{`R$ ${car.rent.price} x${dates.length} diárias`}</St.RentalPriceQuota>
+            <St.RentalPriceQuota>{`R$ ${car.price} x${dates.length} diárias`}</St.RentalPriceQuota>
             <St.RentalPriceTotal>R$ {rentTotal}</St.RentalPriceTotal>
           </St.RentalPriceDetails>
         </St.RentalPrice>

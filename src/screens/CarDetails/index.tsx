@@ -99,8 +99,8 @@ export default function CarDetails() {
             <St.Name>{car.name}</St.Name>
           </St.Description>
           <St.Rent>
-            <St.Period>{car.rent.period}</St.Period>
-            <St.Price>R$ {car.rent.price}</St.Price>
+            <St.Period>{car.period}</St.Period>
+            <St.Price>R$ {car.price}</St.Price>
           </St.Rent>
         </St.Details>
         <St.Accessories>
