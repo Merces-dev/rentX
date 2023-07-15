@@ -27,7 +27,7 @@ git clone https://github.com/Merces-dev/rentX.git
 2. Clone o repositório da API do RentX:
 
 ```
-https://github.com/rodrigorgtic/rentx-api-ignite
+git clone https://github.com/rodrigorgtic/rentx-api-ignite
 ```
 
 3. Instale as dependências do projeto e da API com o seguinte comando nos dois projetos:
