@@ -3,13 +3,8 @@ module.exports = function (api) {
   return {
     presets: ["babel-preset-expo", "module:metro-react-native-babel-preset"],
     plugins: [
-      [
-        "react-native-reanimated/plugin",
-        {
-          relativeSourceLocation: true,
-        },
-        ["@babel/plugin-proposal-decorators", { legacy: true }],
-      ],
+      "react-native-reanimated/plugin",
+      ["@babel/plugin-proposal-decorators", { legacy: true }],
     ],
   };
 };
