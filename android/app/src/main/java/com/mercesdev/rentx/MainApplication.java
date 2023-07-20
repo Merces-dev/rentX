@@ -1,4 +1,4 @@
-package com.rentx;
+package com.mercesdev.rentx;
 
 import android.app.Application;
 import android.content.res.Configuration;

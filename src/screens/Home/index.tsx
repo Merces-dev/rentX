@@ -58,19 +58,25 @@ const Home = () => {
     navigation.navigate("MyCars");
   }
 
-  async function fetchCars() {
-    try {
-      setIsFetchingCars(true);
-      const response = await api.get("/cars");
-      setCars(response.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsFetchingCars(false);
-    }
-  }
   useEffect(() => {
+    let isMounted = true;
+
+    async function fetchCars() {
+      try {
+        const response = await api.get("/cars");
+        if (isMounted) setCars(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        if (isMounted) setIsFetchingCars(false);
+      }
+    }
+
     fetchCars();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
   return (
     <St.Container>
@@ -84,7 +90,7 @@ const Home = () => {
           }}
           data={cars}
           keyExtractor={(item: CarDTO) => item.id}
-          renderItem={({ item }) => (
+          renderItem={({ item }: { item: CarDTO }) => (
             <Car data={item} onPress={() => handleCarDetails(item)} />
           )}
         />

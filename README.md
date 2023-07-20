@@ -1,4 +1,3 @@
-
 # RentX - Aluguel de Carros
 
 O RentX é um aplicativo de aluguel de carros desenvolvido com React Native. Ele permite que os usuários encontrem e aluguem carros de forma fácil e conveniente, proporcionando uma experiência de aluguel de veículos sem complicações.
@@ -45,7 +44,7 @@ npm run start
 5. Inicie o servidor de desenvolvimento:
 
 ```
-expo start
+npx react-native start
 ```
 
 Contribuições são bem-vindas! Se você encontrar algum problema, bug ou tiver alguma sugestão de melhoria, sinta-se à vontade para abrir uma nova issue ou enviar um pull request. Faremos o possível para revisar e incorporar as contribuições da comunidade.
