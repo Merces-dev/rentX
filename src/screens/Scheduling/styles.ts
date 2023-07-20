@@ -1,6 +1,6 @@
-import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
-import { RFValue } from "react-native-responsive-fontsize"
-import styled, { css } from "styled-components/native"
+import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { RFValue } from 'react-native-responsive-fontsize';
+import styled, { css } from 'styled-components/native';
 
 interface DateValueProps {
     selected: boolean;
@@ -9,7 +9,7 @@ interface DateValueProps {
 export const Container = styled.View`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.background_secondary};
-`
+`;
 
 export const Header = styled.View`
     width: 100%;
@@ -20,7 +20,7 @@ export const Header = styled.View`
     justify-content: center;
     padding: 25px;
     padding-top: ${getStatusBarHeight() + 30}px;
-`
+`;
 
 export const Title = styled.Text`
     color: ${({ theme }) => theme.colors.shape};
@@ -28,7 +28,7 @@ export const Title = styled.Text`
     font-size: ${RFValue(34)}px;
 
     margin-top: 14px;
-`
+`;
 
 export const RentalPeriod = styled.View`
     width: 100%;
@@ -38,15 +38,15 @@ export const RentalPeriod = styled.View`
     align-items: center;
 
     margin: 32px 0;
-`
+`;
 export const DateInfo = styled.View`
     width: 30%;
-`
+`;
 export const DateTitle = styled.Text`
     color: ${({ theme }) => theme.colors.text};
     font-family: ${({ theme }) => theme.fonts.secondary_500};
     font-size: ${RFValue(10)}px;
-`
+`;
 
 export const DateValue = styled.Text<DateValueProps>`
     color: ${({ theme }) => theme.colors.shape};
@@ -58,12 +58,12 @@ export const DateValue = styled.Text<DateValueProps>`
         border-bottom-color : ${theme.colors.text};
         padding-bottom: 5px;
     `}
-`
+`;
 
 export const Content = styled.ScrollView.attrs({
-    contentContainerStyle: { paddingBottom: 24 },
-    showsVerticalScrollIndicator: false
-})``
+	contentContainerStyle: { paddingBottom: 24 },
+	showsVerticalScrollIndicator: false
+})``;
 
 export const Footer = styled.View`
     width: 100%;
@@ -71,4 +71,4 @@ export const Footer = styled.View`
 
 
     padding: 16px 24px ${getBottomSpace() + 16}px;
-`
+`;
