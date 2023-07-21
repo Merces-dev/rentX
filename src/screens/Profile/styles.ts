@@ -8,9 +8,9 @@ interface OptionProps {
 }
 
 export const Container = styled.View`
-    flex: 1;
     background-color: ${({ theme }) => theme.colors.background_primary};
 `;
+
 export const Header = styled.View`
     width: 100%;
     height: 227px;
@@ -20,6 +20,7 @@ export const Header = styled.View`
 
     align-items: center;
 `;
+
 export const HeaderTop = styled.View`
     width: 100%;
 
@@ -29,6 +30,7 @@ export const HeaderTop = styled.View`
 
     margin-top: ${getStatusBarHeight() + 32}px;
 `;
+
 export const HeaderTitle = styled.Text`
     font-size: ${RFValue(25)}px;
     font-family: ${({ theme }) => theme.fonts.secondary_600};
@@ -46,6 +48,7 @@ export const PhotoContainer = styled.View`
 
     margin-top: 48px;
 `;
+
 export const Photo = styled.Image`
     width: 180px;
     height: 180px;
@@ -67,10 +70,10 @@ export const PhotoButton = styled(RectButton)`
 `;
 
 export const Content = styled.View`
-    flex: 1;
     padding: 0 24px;
     margin-top: 122px;
 `;
+
 export const Options = styled.View`
     border-bottom-width: 1px;
     border-bottom-color: ${({ theme }) => theme.colors.line};
@@ -89,8 +92,11 @@ export const Option = styled.TouchableOpacity<OptionProps>`
         border-bottom-color : ${theme.colors.main};
     `}
 `;
+
 export const OptionTitle = styled.Text<OptionProps>`
     color: ${({ active, theme }) => active ? theme.colors.header : theme.colors.text};
     font-family: ${({ active, theme }) => active ? theme.fonts.secondary_600 : theme.fonts.secondary_500};
     font-size: ${RFValue(20)}px;
 `;
+
+export const Section = styled.View``;

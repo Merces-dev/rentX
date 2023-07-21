@@ -3,5 +3,9 @@
     "strict": true,
     "experimentalDecorators": true
   },
+  "include": [
+    "src/**/*",
+    "src/**/**/*",
+  ],
   "extends": "expo/tsconfig.base"
 }
