@@ -29,6 +29,7 @@ interface AuthContextData {
   signIn: ( credentials: SignInCredentials ) => Promise<void>;
   signOut: () => Promise<void>;
   updateUser: ( user: User ) => Promise<void>;
+  loading: boolean;
 }
 
 interface AuthProviderProps {
@@ -39,6 +40,7 @@ const AuthContext = createContext<AuthContextData>( {} as AuthContextData );
 
 function AuthProvider( { children }: AuthProviderProps ) {
     const [data, setData] = useState<User>( {} as User );
+    const [isLoading, setIsLoading] = useState<boolean>( true );
 
     async function signIn( { email, password }: SignInCredentials ) {
         try {
@@ -82,8 +84,9 @@ function AuthProvider( { children }: AuthProviderProps ) {
         try {			
             const userCollection = database.get<ModelUser>( 'users' );
             await database.write( async () => {
-                console.log( { userCollection, user } );
                 const userSelected = await userCollection.find( user.id );
+                console.log( { userSelected } );
+
                 await userSelected.update( ( userData ) => {
                     userData.name = user.name,
                     userData.driver_license = user.driver_license,
@@ -105,6 +108,7 @@ function AuthProvider( { children }: AuthProviderProps ) {
                 api.defaults.headers.authorization = `Bearer ${userData.token}`;
                 setData( userData );
             }
+            setIsLoading( false );
         }
         loadUserData();
     }, [] );
@@ -115,7 +119,8 @@ function AuthProvider( { children }: AuthProviderProps ) {
                 user: data,
                 signIn,
                 signOut,
-                updateUser
+                updateUser,
+                loading: isLoading
             }}
         >
             {children}

@@ -34,6 +34,7 @@ module.exports = {
         'indent': ['error', 4],
         'space-in-parens': ['error', 'always'],
         'object-curly-spacing': ['error', 'always'],
+        'multiline-ternary': ['error', 'always'],
         'comma-spacing': ['error', { 'before': false, 'after': true }],
         'linebreak-style': [
             'error',

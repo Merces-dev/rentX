@@ -5,11 +5,11 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
     width: 100%;
     height: 100%;
-    background-color: ${({ theme }) => theme.colors.background_secondary};
-`
+    background-color: ${( { theme } ) => theme.colors.background_secondary};
+`;
 export const CarImages = styled.View`
     margin-top: ${getStatusBarHeight() + 32}px;
-`
+`;
 export const Header = styled.View`
     flex-direction: row;
     justify-content: space-between;
@@ -18,7 +18,7 @@ export const Header = styled.View`
     position: absolute;
     margin-top: ${getStatusBarHeight() + 18}px;
     margin-left: 24px;
-`
+`;
 
 export const Details = styled.View`
     width: 100%;
@@ -26,44 +26,44 @@ export const Details = styled.View`
     align-items: center;
     justify-content: space-between;
     margin-top: 8px;
-`
-export const Description = styled.View``
+`;
+export const Description = styled.View``;
 
 export const Brand = styled.Text`
-    font-family: ${({ theme }) => theme.fonts.secondary_500};
-    font-size: ${RFValue(10)}px;
-    color: ${({ theme }) => theme.colors.text_detail};
+    font-family: ${( { theme } ) => theme.fonts.secondary_500};
+    font-size: ${RFValue( 10 )}px;
+    color: ${( { theme } ) => theme.colors.text_detail};
 
     text-transform: uppercase;
-`
+`;
 export const Name = styled.Text`
-    font-family: ${({ theme }) => theme.fonts.secondary_500};
-    font-size: ${RFValue(25)}px;
-    color: ${({ theme }) => theme.colors.title};
+    font-family: ${( { theme } ) => theme.fonts.secondary_500};
+    font-size: ${RFValue( 25 )}px;
+    color: ${( { theme } ) => theme.colors.title};
 
-`
-export const Rent = styled.View``
+`;
+export const Rent = styled.View``;
 
 export const Period = styled.Text`
-    font-family: ${({ theme }) => theme.fonts.secondary_500};
-    font-size: ${RFValue(10)}px;
-    color: ${({ theme }) => theme.colors.text_detail};
+    font-family: ${( { theme } ) => theme.fonts.secondary_500};
+    font-size: ${RFValue( 10 )}px;
+    color: ${( { theme } ) => theme.colors.text_detail};
 
     text-transform: uppercase;
-`
+`;
 export const Price = styled.Text`
-    font-family: ${({ theme }) => theme.fonts.secondary_500};
-    font-size: ${RFValue(25)}px;
-    color: ${({ theme }) => theme.colors.main};
-`
+    font-family: ${( { theme } ) => theme.fonts.secondary_500};
+    font-size: ${RFValue( 25 )}px;
+    color: ${( { theme } ) => theme.colors.main};
+`;
 export const About = styled.Text`
-    font-family: ${({ theme }) => theme.fonts.primary_400};
-    font-size: ${RFValue(15)}px;
-    color: ${({ theme }) => theme.colors.text};
+    font-family: ${( { theme } ) => theme.fonts.primary_400};
+    font-size: ${RFValue( 15 )}px;
+    color: ${( { theme } ) => theme.colors.text};
     text-align: justify;
-    line-height: ${RFValue(25)}px;
+    line-height: ${RFValue( 25 )}px;
     margin-top: 8px;
-`
+`;
 
 export const Accessories = styled.View`
     width: 100%;
@@ -74,11 +74,17 @@ export const Accessories = styled.View`
     justify-content: space-between;
 
     margin-top: 8px;
-`
+`;
 export const Footer = styled.View`
     width: 100%;
-    background-color: ${({ theme }) => theme.colors.background_secondary};
+    background-color: ${( { theme } ) => theme.colors.background_secondary};
 
 
     padding: 16px 24px ${getBottomSpace() + 16}px;
-`
+`;
+export const OfflineInfo = styled.Text`
+    font-family: ${( { theme } ) => theme.fonts.primary_400};
+    font-size: ${RFValue( 10 )}px;
+    color: ${( { theme } ) => theme.colors.main};
+    text-align: center;
+`;

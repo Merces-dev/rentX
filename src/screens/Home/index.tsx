@@ -71,11 +71,12 @@ const Home = () => {
                 const { data } = await api.get( `cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}` );
 
                 const { changes, latestVersion } = data;
+                console.log( { changes } );
                 return { changes, timestamp: latestVersion, };
             },
             pushChanges: async ( { changes } ) => {
                 const user = changes.users;
-                await api.post( '/users/sync', user );
+                await api.post( '/users/sync', user ).catch( console.log );
             }
         } );
     }
@@ -109,20 +110,22 @@ const Home = () => {
     return (
         <St.Container>
             <Header carQuantity={cars.length} isLoading={isFetchingCars} />
-            {isFetchingCars ? (
-                <LoadAnimation />
-            ) : (
-                <St.CarList
-                    contentContainerStyle={{
-                        padding: 18,
-                    }}
-                    data={cars}
-                    keyExtractor={( item: CarDTO ) => item.id}
-                    renderItem={( { item }: { item: CarDTO } ) => (
-                        <Car data={item} onPress={() => handleCarDetails( item )} />
-                    )}
-                />
-            )}
+            {isFetchingCars
+                ? (
+                    <LoadAnimation />
+                )
+                : (
+                    <St.CarList
+                        contentContainerStyle={{
+                            padding: 18,
+                        }}
+                        data={cars}
+                        keyExtractor={( item: CarDTO ) => item.id}
+                        renderItem={( { item }: { item: CarDTO } ) => (
+                            <Car data={item} onPress={() => handleCarDetails( item )} />
+                        )}
+                    />
+                )}
             <PanGestureHandler onGestureEvent={onGestureEvent}>
                 <Animated.View
                     style={[

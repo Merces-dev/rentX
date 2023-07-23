@@ -13,6 +13,7 @@ import { useAuth } from '../../hooks/auth';
 import * as ImagePicker from 'expo-image-picker';
 import * as Yup from 'yup';
 import Button from '../../components/Button';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 const Profile = () => {
     const { user, signOut, updateUser } = useAuth();
@@ -23,13 +24,18 @@ const Profile = () => {
     const [driverLicense, setDriverLicense] = useState( user.driver_license );
 
     const theme = useTheme();
+    const netInfo = useNetInfo();
     const navigation = useNavigation();
 
     function handleBack() {
         navigation.goBack();
     }
     function handleSelectedOption( selectedOption: 'dataEdit' | 'passwordEdit' ) {
-        setOption( selectedOption );
+        if( netInfo.isConnected === false && selectedOption === 'passwordEdit' ){
+            Alert.alert( 'Offline', 'Para mudar a senha conecte-se a internet' );
+        }else{
+            setOption( selectedOption );
+        }
     }
     async function handleSignOut() {
         Alert.alert(
@@ -135,39 +141,41 @@ const Profile = () => {
                             </St.Option>
                         </St.Options>
 
-                        {option == 'dataEdit' ? (
-                            <St.Section>
-                                <Input
-                                    iconName={'user'}
-                                    placeholder={'Nome'}
-                                    autoCorrect={false}
-                                    defaultValue={user.name}
-                                    onChangeText={setName}
-                                />
-                                <Input
-                                    iconName={'mail'}
-                                    editable={false}
-                                    defaultValue={user.email}
-                                />
+                        {option == 'dataEdit'
+                            ? (
+                                <St.Section>
+                                    <Input
+                                        iconName={'user'}
+                                        placeholder={'Nome'}
+                                        autoCorrect={false}
+                                        defaultValue={user.name}
+                                        onChangeText={setName}
+                                    />
+                                    <Input
+                                        iconName={'mail'}
+                                        editable={false}
+                                        defaultValue={user.email}
+                                    />
 
-                                <Input
-                                    iconName={'credit-card'}
-                                    placeholder={'CNH'}
-                                    keyboardType="numeric"
-                                    defaultValue={user.driver_license}
-                                    onChangeText={setDriverLicense}
-                                />
-                            </St.Section>
-                        ) : (
-                            <St.Section>
-                                <InputPassword iconName={'lock'} placeholder={'Senha atual'} />
-                                <InputPassword iconName={'lock'} placeholder={'Nova senha'} />
-                                <InputPassword
-                                    iconName={'lock'}
-                                    placeholder={'Repetir senha'}
-                                />
-                            </St.Section>
-                        )}
+                                    <Input
+                                        iconName={'credit-card'}
+                                        placeholder={'CNH'}
+                                        keyboardType="numeric"
+                                        defaultValue={user.driver_license}
+                                        onChangeText={setDriverLicense}
+                                    />
+                                </St.Section>
+                            )
+                            : (
+                                <St.Section>
+                                    <InputPassword iconName={'lock'} placeholder={'Senha atual'} />
+                                    <InputPassword iconName={'lock'} placeholder={'Nova senha'} />
+                                    <InputPassword
+                                        iconName={'lock'}
+                                        placeholder={'Repetir senha'}
+                                    />
+                                </St.Section>
+                            )}
                         <Button title={'Salvar alterações'} onPress={handleProfileUpdate} />
                     </St.Content>
                 </St.Container>
