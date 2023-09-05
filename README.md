@@ -11,7 +11,7 @@ O RentX é um aplicativo de aluguel de carros desenvolvido com React Native. Ele
 ## Requisitos
 
 * Node.js (versão 16 ou superior)
-* React Native (Expo)
+* React Native (Iniciado com Expo)
 * Yarn (ou NPM)
 * Emulador ou dispositivo físico para executar o aplicativo
 
